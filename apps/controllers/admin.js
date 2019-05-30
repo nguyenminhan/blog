@@ -17,6 +17,7 @@ router.get("/signup",function(req,res){
 });
 
 router.post("/signup",function(req,res){
+   
     var user = req.body;
     if(user.email.trim().length == 0){
         res.redirect("admin/signin");
@@ -49,9 +50,7 @@ router.get("/signin",function(req,res){
 });
 
 router.post("/signin",function(req,res){
-   
     var params = req.body;
-    console.log(params);
     if(params.email.trim().length == 0){
         res.render('signin',{data :{error : "Email is required"}});
     }else{
@@ -59,6 +58,7 @@ router.post("/signin",function(req,res){
         if(data){
             data.then(function(users){
                 var user = users[0];
+                console.log(user);return
                 var status = helper.compare_password(params.passwd, user.password);
 
                 if(!status){
