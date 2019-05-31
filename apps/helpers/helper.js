@@ -10,9 +10,22 @@ function hash_password(password){
     return hash;
 }
 
-function compare_password(password,hash){
-    return bcrypt.compareSync(password, hash);
+function compare_password(myPlaintextPassword,hash){
+
+    return bcrypt.compare(myPlaintextPassword, hash);
+    
 }
+
+// const compare_password = (plainPassword, hashPassword) => {
+//     return bcrypt
+//       .compareSync(plainPassword, hashPassword)
+//       .then(valid => {
+//         if (valid) {
+//           return Promise.resolve(valid)
+//         }
+//         return Promise.reject(new Error('Invalid Password'))
+//       })
+//   }
 
 module.exports = {
     hash_password : hash_password,
